@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Head content here -->
+</head>
+<body>
+<form
+        th:method="POST" th:action="@{/departments/save/{hospitalId} (hospitalId = ${hospitalId})}" th:object="${newDepartment}">
+
+  <div>
+    <label for="name">Name</label>
+    <input type="text" th:field="*{name}" id="name">
+  </div>
+
+  <button type="submit">Save Department</button>
+  <a class="btn btn-primary" href="/departments/{hospitalId} (hospitalId=${hospitalId})" role="button">Go Back</a>
+
+</form>
+</body>
+</html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="container">-->
+<!--  <form th:method="POST" th:action="@{/departments/saveD}" th:object="${newDepartment}" class="form_hospital">-->
+<!--    <div>-->
+<!--      <label for="name" class="labels"> name </label>-->
+<!--      <br/>-->
+<!--      <input type="text" th:field="*{name}"id="name" class="inputs">-->
+<!--      <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error</div>-->
+<!--      <div class="form-group">-->
+<!--        <select th:field="*{hospitalId}">-->
+<!--          <option value="">&#45;&#45;  Hospital  &#45;&#45;</option>-->
+<!--          <option th:each="hospitals : ${getAllHospitals}" th:value="${hospitals.getId()}" th:text="${hospitals.getName()}"></option>-->
+<!--        </select>-->
+<!--      </div>-->
+<!--      <button type="submit" class="btn_save">SAVE</button>-->
+<!--    </div>-->
+<!--  </form>-->
+<!--</div>-->
+<!--</div>-->
+
+
+<!--</body>-->
+<!--</html>-->

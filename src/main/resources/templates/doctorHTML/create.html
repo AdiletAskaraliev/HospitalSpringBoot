@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Head content here -->
+</head>
+<body>
+<form
+        th:method="POST" th:action="@{/doctors/save/{hospitalId} (hospitalId = ${hospitalId})}" th:object="${newDoctor}">
+
+  <div>
+    <label for="firstname">FirstName</label>
+    <input type="text" th:field="*{firstname}" id="firstname">
+  </div>
+
+  <div>
+    <label for="lastname">LastName</label>
+    <input type="text" th:field="*{lastname}" id="lastname">
+  </div>
+
+  <div>
+    <label for="position">Position</label>
+    <input type="text" th:field="*{position}" id="position">
+  </div>
+
+  <div>
+    <label for="email">Email</label>
+    <input type="text" th:field="*{email}" id="email">
+  </div>
+
+
+  <button type="submit">Save Doctor</button>
+<!--  <a class="btn btn-primary" href="/departments/{hospitalId} (hospitalId=${hospitalId})" role="button">Go Back</a>-->
+
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+</head>
+<body>
+
+
+<div class="container" style="width: 80%; margin: 0 auto">
+    <div class="card" style="width: 18rem;"
+         th:each="hospital:${getAllHospitals}">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${hospital.getName()}">Hospital</h5>
+            <p class="card-text" th:text="${hospital.getAddress}">Address</p>
+
+            <form th:method="GET" th:action="@{/hospitals/{hospitalId}/hospital (hospitalId=${hospital.getId()})}">
+                <input type="submit" th:value="Enter">
+            </form>
+
+            <form th:method="GET" th:action="@{/hospitals/{hospitalId}/update(hospitalId=${hospital.getId()})}">
+                <input type="submit" th:value="Update">
+            </form>
+
+            <form th:method="GET" th:action="@{/hospitals/{hospitalId}/delete (hospitalId=${hospital.getId()})}">
+                <input type="submit" th:value="Delete">
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<a class="btn btn-primary" href="/hospitals/new" role="button">Add Hospitals</a>
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+</html>

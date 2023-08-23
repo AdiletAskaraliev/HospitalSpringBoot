@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Assign Doctor to Department</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-4">
+  <h2>Assign Doctor to Department</h2>
+
+  <form th:action="@{/doctors/accept/{doctorId} (doctorId=${doctorId})}" method="post">
+
+    <input type="hidden" name="doctorId" th:value="${doctorId}">
+    <div class="form-group">
+      <label for="department">Select Department:</label>
+      <select class="form-control" id="department" name="departmentId" required>
+        <option th:each="department : ${allDepartments}" th:value="${department.getId()}" th:text="${department.getName()}">Department Name</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Assign to Department</button>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
