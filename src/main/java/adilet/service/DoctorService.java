@@ -13,4 +13,10 @@ public interface DoctorService {
     Doctor getById(Long id);
     void update(Long id,Doctor doctor);
     public void assignDoctorToDepartment(Long doctorId, Long departmentId);
+
+    Doctor findDoctorByHospitalId(Long hospitalId, Long docId);
+
+    void updateToDoctorByHospitalId(Long hospitalId, Long docId, Doctor newDoctor);
+
+    void deleteDoctorByHospitalId(Long hospitalId, Long docId);
 }

@@ -21,15 +21,15 @@
           <p class="card-text" th:text="${doctor.getEmail()}">Email</p>
 
           <!-- You can add update and delete buttons here if needed -->
-          <form th:method="GET" th:action="@{/doctors/{hospitalId}/update/{depId} (hospitalId = ${hospitalId}, depId = ${doctor.getId()})}">
+          <form th:method="GET" th:action="@{/doctors/{hospitalId}/update/{docId} (hospitalId = ${hospitalId}, docId = ${doctor.getId()})}">
             <input type="submit" th:value="Update">
           </form>
 
-          <form th:method="GET" th:action="@{/doctors/assign/{hospitalId} (hospitalId=${hospitalId})}">
+          <form th:method="GET" th:action="@{/doctors/{hospitalId}/assign/{doctorId} (hospitalId=${hospitalId}, doctorId=${doctor.getId()})}">
             <input type="submit" th:value="Assign">
           </form>
 
-          <form th:method="GET" th:action="@{/doctors/{hospitalId}/delete/{depId} (hospitalId=${hospitalId}, depId=${doctor.getId()})}">
+          <form th:method="GET" th:action="@{/doctors/{hospitalId}/delete/{docId} (hospitalId=${hospitalId}, docId=${doctor.getId()})}">
             <input type="submit" th:value="Delete">
           </form>
 

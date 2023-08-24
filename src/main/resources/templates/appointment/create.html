@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>New Appointment</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header Styles */
+    .header {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    /* Form Styles */
+    .form-container {
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container label {
+      font-weight: bold;
+    }
+
+    .form-container input[type="date"],
+    .form-container select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    /* Button Styles */
+    .btn-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .btn-container .btn-primary,
+    .btn-container .btn-secondary {
+      display: inline-block;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn-container .btn-primary {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .btn-container .btn-primary:hover {
+      background-color: #45a049;
+    }
+
+    .btn-container .btn-secondary {
+      background-color: #95a5a6;
+      color: white;
+      margin-right: 10px;
+    }
+
+    .btn-container .btn-secondary:hover {
+      background-color: #7f8c8d;
+    }
+  </style>
+</head>
+<body>
+<div class="header">
+  <h1>New Appointment</h1>
+</div>
+<div class="bg-success p-2 text-white bg-opacity-75">
+  <form th:method="POST" th:action="@{/appointments/save/{hospitalId}(hospitalId=${hospitalId})}" th:object="${newAppointment}" class="form-container">
+    <div>
+      <label for="date">Date</label>
+      <input type="date" th:field="*{date}" id="date">
+    </div>
+
+    <div>
+      <label for="patient">Patient</label>
+      <select th:field="*{patient.id}" id="patient">
+        <option th:each="patient : ${patients}" th:value="${patient.getId()}" th:text="${patient.firstname}"></option>
+      </select>
+    </div>
+
+    <div>
+      <label for="doctor">Doctor</label>
+      <select th:field="*{doctor.id}" id="doctor">
+        <option th:each="doctor : ${doctors}" th:value="${doctor.getId()}" th:text="${doctor.firstname}"></option>
+      </select>
+    </div>
+
+    <div>
+      <label for="department">Department</label>
+      <select th:field="*{department.id}" id="department">
+        <option th:each="department : ${departments}" th:value="${department.getId()}" th:text="${department.name}"></option>
+      </select>
+    </div>
+
+    <div class="btn-container">
+      <a class="btn-secondary" href="/appointments" role="button">Go Back</a>
+      <button class="btn-primary" type="submit">Save Appointment</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

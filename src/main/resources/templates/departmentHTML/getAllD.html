@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<a class="btn btn-primary" th:href="@{/departments/createD}" role="button">Add Department</a>
+<a class="btn btn-primary" th:href="@{/departments/create/{hospitalId} (hospitalId = ${hospitalId})}" role="button">Add Department</a>
 
 <div class="container" style="width: 80%; margin: 0 auto">
     <div class="card" style="width: 18rem;"

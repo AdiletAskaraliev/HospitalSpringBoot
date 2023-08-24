@@ -6,7 +6,7 @@ import adilet.entity.Hospital;
 import java.util.List;
 
 public interface DepartmentService {
-    void createDepartment(Department department);
+    void createDepartmentByHospital(Department department, Long hospitalId);
     List<Department> findAll();
     List<Department> getAllDepartments(Long id);
     List<Department> findByHospitalId(Long hospitalId);

@@ -6,7 +6,6 @@ import adilet.service.HospitalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -23,27 +22,26 @@ public class DepartmentApi {
         return "departmentHTML/getAllD";
     }
 
+//    @GetMapping("/create/{hospitalId}")
+//    public String createDepartmentByHospitalId(@PathVariable Long hospitalId, Model model) {
+//        model.addAttribute("hospitalId", hospitalId);
+//        model.addAttribute("newDepartment", new Department());
+//        return "departmentHTML/createD";
+//    }
+
     @GetMapping("/create/{hospitalId}")
     public String createDepartmentByHospitalId(@PathVariable Long hospitalId, Model model) {
         model.addAttribute("hospitalId", hospitalId);
+        model.addAttribute("getAllHospitals", hospitalService.getAllHospital());
         model.addAttribute("newDepartment", new Department());
         return "departmentHTML/createD";
     }
 
-//@GetMapping("/createD")
-//public String createDepartmentByHospitalId(Model model) {
-//    model.addAttribute("getAllHospitals", hospitalService.getAllHospital());
-//    model.addAttribute("newDepartment", new Department());
-//    return "departmentHTML/createD";
-//}
-
-    @PostMapping("/saveD")
-    public String saveDepartmentByHospital(@ModelAttribute("newDepartment") Department department, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()){
-            return "redirect:/departments";
-        }
-        departmentService.createDepartment(department);
-        return "redirect:/hospitals";
+    @PostMapping("/save/{hospitalId}")
+    public String saveDepartmentByHospital(@ModelAttribute("newDepartment") Department department,
+                                           @PathVariable Long hospitalId) {
+        departmentService.createDepartmentByHospital(department, hospitalId);
+        return "redirect:/departments/" + hospitalId;
     }
 
     @GetMapping("/{hospitalId}/enter/{depId}")
@@ -53,7 +51,9 @@ public class DepartmentApi {
     }
 
     @GetMapping("/{hospitalId}/update/{depId}")
-    public String updateToDepartmentByHospitalId(Model model, @PathVariable Long hospitalId, @PathVariable Long depId) {
+    public String updateToDepartmentByHospitalId(Model model,
+                                                 @PathVariable Long hospitalId,
+                                                 @PathVariable Long depId) {
         model.addAttribute("hospitalId", hospitalId);
         model.addAttribute("depId", depId);
         model.addAttribute("thisDepartment", departmentService.findDepartmentByHospitalId(hospitalId, depId));
@@ -68,7 +68,8 @@ public class DepartmentApi {
     }
 
     @GetMapping("/{hospitalId}/delete/{depId}")
-    public String deleteToDepartmentByHospitalId(@PathVariable("hospitalId") Long hospitalId, @PathVariable("depId") Long depId) {
+    public String deleteToDepartmentByHospitalId(@PathVariable("hospitalId") Long hospitalId,
+                                                 @PathVariable("depId") Long depId) {
         departmentService.deleteToDepartmentWithIdByHospitalId(hospitalId, depId);
         return "redirect:/departments/" + hospitalId;
     }

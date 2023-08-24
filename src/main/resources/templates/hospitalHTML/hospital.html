@@ -60,14 +60,19 @@
 </nav>
 <div class="container">
     <div class="section">
-        <h2><a th:href="@{/departments/{hospitalId}(hospitalId=${hospitalId})}" >Department</a></h2>
+        <h2><a th:href="@{/departments/{hospitalId}(hospitalId=${hospitalId})}" >Departments</a></h2>
     </div>
     <div class="section">
         <h2><a th:href="@{/doctors/{hospitalId}(hospitalId=${hospitalId})}">Doctors</a></h2>
         <!-- Content for the patients section -->
     </div>
     <div class="section">
-        <h2><a href="#">Patients</a></h2>
+        <h2><a th:href="@{/patients/{hospitalId}(hospitalId=${hospitalId})}">Patients</a></h2>
+        <!-- Content for the doctors section -->
+    </div>
+
+    <div class="section">
+        <h2><a th:href="@{/appointments/{hospitalId}(hospitalId=${hospitalId})}">Appointment</a></h2>
         <!-- Content for the doctors section -->
     </div>
 </div>

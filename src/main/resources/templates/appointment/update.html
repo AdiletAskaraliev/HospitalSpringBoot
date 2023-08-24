@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Head content here -->
+</head>
+<body>
+<form th:method="POST" th:action="@{/appointments/{hospitalId}/edit/{appId}(appId=${appId})}" th:object="${thisAppointment}">
+
+  <div>
+    <label for="date">Date</label>
+    <input type="datetime-local" th:field="*{date}" id="date">
+  </div>
+
+  <div>
+    <label for="patientName">Patient Name</label>
+    <input type="text" th:field="*{getPatient().firstname}" id="patientName">
+    <label for="patientLastname">Patient Lastname</label>
+    <input type="text" th:field="*{getPatient().lastname}" id="patientLastname">
+  </div>
+
+  <div>
+    <label for="doctorName">Doctor Name</label>
+    <input type="text" th:field="*{getDoctor().firstname}" id="doctorName">
+    <label for="doctorLastname">Doctor Lastname</label>
+    <input type="text" th:field="*{getDoctor().lastname}" id="doctorLastname">
+  </div>
+
+  <div>
+    <label for="department">Department</label>
+    <input type="text" th:field="*{getDepartment().getName()}" id="department">
+  </div>
+
+  <button type="submit">Update Appointment</button>
+  <a class="btn btn-primary" th:href="@{/appointments/{appId}(appId=${appId})}" role="button">Go Back</a>
+
+</form>
+</body>
+</html>

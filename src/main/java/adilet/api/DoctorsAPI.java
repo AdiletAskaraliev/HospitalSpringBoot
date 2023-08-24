@@ -43,19 +43,49 @@ public class DoctorsAPI {
         return "redirect:/doctors/" + hospitalId;
     }
 
-    @GetMapping("/assign/{doctorId}")
-    public String showAssignToDepartmentForm(@PathVariable Long doctorId, Model model) {
-        List<Department> allDepartments = departmentService.findAll();
-        model.addAttribute("allDepartments", allDepartments);
+
+    @GetMapping("/{hospitalId}/assign/{doctorId}")
+    public String showAssignToDepartmentForm(@PathVariable Long doctorId,
+                                             @PathVariable Long hospitalId,
+                                             Model model) {
+        model.addAttribute("allDepartments", departmentService.findAll(hospitalId));
         model.addAttribute("doctorId", doctorId);
+        model.addAttribute("hospitalId", hospitalId);
         return "doctorHTML/assignToDepartment";
     }
 
-    @PostMapping("/{doctorId}/assign")
-    String assignDoctorToDepartment(@PathVariable Long doctorId, Long departmentId) {
+    @PostMapping("/accept/{doctorId}")
+    String assignDoctorToDepartment(@PathVariable Long doctorId, Long departmentId, Model model) {
+        model.addAttribute("depId", departmentId);
         doctorService.assignDoctorToDepartment(doctorId, departmentId);
-        return "redirect:/doctors/" + doctorId;
+        return "redirect:/doctors/{hospitalId}";
     }
 
-//    @GetMapping("/{hospitalId}/update/{depId}")
+
+
+    @GetMapping("/{hospitalId}/update/{docId}")
+    String updateDoctorByHospitalId(@PathVariable Long hospitalId,
+                                    @PathVariable Long docId,
+                                    Model model){
+        model.addAttribute("hospitalId", hospitalId);
+        model.addAttribute("docId", docId);
+        model.addAttribute("thisDoctor", doctorService.findDoctorByHospitalId(hospitalId, docId));
+        return "doctorHTML/update";
+    }
+
+    @PostMapping("/{hospitalId}/edit/{docId}")
+    String editDoctorByHospitalId(@PathVariable Long hospitalId,
+                                  @PathVariable Long docId,
+                                  @ModelAttribute("thisDoctor") Doctor newDoctor){
+        doctorService.updateToDoctorByHospitalId(hospitalId, docId, newDoctor);
+        return "redirect:/doctors/" + hospitalId;
+    }
+
+    @GetMapping("/{hospitalId}/delete/{docId}")
+    String deleteDocByHospitalId(@PathVariable("hospitalId") Long hospitalId,
+                                 @PathVariable("docId") Long docId){
+        doctorService.deleteDoctorByHospitalId(hospitalId, docId);
+        return "redirect:/doctors/" + hospitalId;
+
+    }
 }

@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+
+
+
 import java.time.LocalDate;
 @Entity
 @Table(name = "appointments")
@@ -48,4 +51,28 @@ public class Appointment {
     private Department department;
     @ManyToOne
     private Hospital hospital;
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
 }

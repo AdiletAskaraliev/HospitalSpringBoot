@@ -21,8 +21,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     private final HospitalRepo hospitalRepo;
 
     @Override
-    public void createDepartment(Department department) {
-        Hospital hospital = hospitalRepo.findById(department.getHospitalId()).orElseThrow();
+    public void createDepartmentByHospital(Department department, Long hospitalId) {
+        Hospital hospital = hospitalRepo.findById(hospitalId).orElseThrow();
         department.setHospital(hospital);
         departmentRepo.save(department);
     }
@@ -34,7 +34,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public List<Department> getAllDepartments(Long id) {
-        return null;
+        return findByHospitalId(id);
     }
 
 

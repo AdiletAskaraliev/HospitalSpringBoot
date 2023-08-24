@@ -75,4 +75,29 @@ public class DoctorsServiceImpl implements DoctorService {
 
         department.addDoctor(doctor);
     }
+
+    @Override
+    public Doctor findDoctorByHospitalId(Long hospitalId, Long docId) {
+        return doctorRepo.findDoctorByHospitalId(hospitalId, docId);
+    }
+
+    @Override
+    public void updateToDoctorByHospitalId(Long hospitalId, Long docId, Doctor newDoctor) {
+        Doctor doctor = findDoctorByHospitalId(hospitalId, docId);
+        if (doctor != null) {
+            doctor.setFirstname(newDoctor.getFirstname());
+            doctor.setLastname(newDoctor.getLastname());
+            doctor.setPosition(newDoctor.getPosition());
+            doctor.setEmail(newDoctor.getEmail());
+
+            doctorRepo.save(doctor);
+        }
+
+    }
+
+    @Override
+    public void deleteDoctorByHospitalId(Long hospitalId, Long docId) {
+        Doctor doctor = doctorRepo.findDoctorByHospitalId(hospitalId, docId);
+        doctorRepo.delete(doctor);
+    }
 }
